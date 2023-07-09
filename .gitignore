@@ -1,2 +1,4 @@
 # Virtualenv
 P3_venv/
+# Formatter
+.vscode/
