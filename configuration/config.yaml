@@ -1,0 +1,10 @@
+path:
+  train:
+    demographics: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/df_telco_customer_churn_demographics.csv"
+    services: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/df_telco_customer_churn_services.csv"
+    status: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/df_telco_customer_churn_status.csv"
+  test:
+    demographics: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/eval_df_telco_customer_churn_demographics.csv"
+    services: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/eval_df_telco_customer_churn_services.csv"
+    status: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/eval_df_telco_customer_churn_status_no_target.csv"
+  model: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/lightGBM_model.txt"
