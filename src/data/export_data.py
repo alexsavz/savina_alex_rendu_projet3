@@ -19,7 +19,7 @@ def save_data(data1, data2) -> pd.DataFrame:
     data2.rename({col[0]: "churn_value"}, axis=1, inplace=True)
     y_pred_test = pd.concat([data1, data2], axis=1, verify_integrity=True)
     csv = y_pred_test.to_csv(
-        "./data/eval_df_telco_customer_churn_services_pred.csv", index=False
+        "./dataset/eval_df_telco_customer_churn_services_pred.csv", index=False
     )
 
     return csv
