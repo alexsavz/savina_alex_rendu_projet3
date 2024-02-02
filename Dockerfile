@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 COPY main.py .
 COPY src ./src
 COPY configuration ./configuration
-COPY dataset ./data
+COPY dataset ./dataset
 COPY models ./models
 
 CMD ["python3", "main.py"]
