@@ -39,4 +39,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: alexsavz/savina_alex_rendu_projet3:latest
+          tags: alexsavina/savina_alex_rendu_projet3:latest
