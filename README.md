@@ -1,3 +1,5 @@
+[![Build, test and push](https://github.com/alexsavz/savina_alex_rendu_projet3/actions/workflows/ci.yaml/badge.svg)](https://github.com/alexsavz/savina_alex_rendu_projet3/actions/workflows/ci.yaml)
+
 # Probabilité de résiliation
 
 ### Telco costumer churn
