@@ -10,4 +10,6 @@ plotly==5.13.1
 lightgbm==3.3.5
 xgboost==1.7.6
 shap==0.42.0
-requests==2.31.0                  
+requests==2.31.0
+streamlit==1.31.0
+streamlit-shap==1.0.2                  
