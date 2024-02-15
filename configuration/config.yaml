@@ -8,3 +8,5 @@ path:
     services: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/eval_df_telco_customer_churn_services.csv"
     status: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/eval_df_telco_customer_churn_status_no_target.csv"
   model: "https://raw.githubusercontent.com/alexsavz/projet3DataGong/main/lightGBM_model.txt"
+  azureml_endpoint: 'https://scoring-clientsfragiles-puryb.francecentral.inference.ml.azure.com/score'
+  azureml_api_key: "sdhdiqXRCkBJHJfmZqOlMVZtermnagfT"

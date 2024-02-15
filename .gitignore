@@ -3,3 +3,5 @@ P3_venv/
 __pycache__/
 # Formatter
 .vscode/
+# mlflow
+mlruns/

@@ -1,15 +1,18 @@
 """fonctions d’entrainement et d’évaluation du modèle"""
+import json
+import os
+import ssl
+import urllib.request
+import streamlit as st
 
-import pandas as pd
-import numpy as np
 import lightgbm as lgb
+import numpy as np
+import pandas as pd
 import requests
-
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import StandardScaler
-from sklearn.pipeline import make_pipeline
 from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 def data_features_selection(data: pd.DataFrame) -> pd.DataFrame:
@@ -106,3 +109,70 @@ def load_model(path: str) -> dict:
     model = lgb.Booster(model_str=req)
 
     return model
+
+
+def json_formater(df, number):
+    # Convertir le DataFrame en JSON
+    json_df = df.iloc[(number - 1) : number, :].to_json(orient="split")
+    # Formatons les données pour l'endpoints du modèle ML qui attend une structure spécifique du JSON
+    json_to_py = json.loads(json_df)
+    data_str = {"input_data": json_to_py}
+    data = str.encode(json.dumps(data_str))
+    return data
+
+
+def allow_SelfSigned_Https(allowed):
+    # bypass the server certificate verification on client side
+    if (
+        allowed
+        and not os.environ.get("PYTHONHTTPSVERIFY", "")
+        and getattr(ssl, "_create_unverified_context", None)
+    ):
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+
+def mlflow_model(body, url, api_key):
+    allow_SelfSigned_Https(
+        True
+    )  # this line is needed if you use self-signed certificate in your scoring service.
+
+    # Request data goes here
+    # The example below assumes JSON formatting which may be updated
+    # depending on the format your endpoint expects.
+    # More information can be found here:
+    # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
+
+    # Replace this with the primary/secondary key or AMLToken for the endpoint
+    if not api_key:
+        raise ValueError("A key should be provided to invoke the endpoint")
+
+    # The azureml-model-deployment header will force the request to go to a specific deployment.
+    # Remove this header to have the request observe the endpoint traffic rules
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": ("Bearer " + api_key),
+        "azureml-model-deployment": "scoring1-1",
+    }
+
+    req = urllib.request.Request(url, body, headers)
+
+    try:
+        response = urllib.request.urlopen(req)
+
+        result = response.read()
+    except urllib.error.HTTPError as error:
+        print("The request failed with status code: " + str(error.code))
+
+        # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+        print(error.info())
+        print(error.read().decode("utf8", "ignore"))
+    return result
+
+def bytes_to_int(bytes_val):
+    # Convertir bytes en string
+    string_val = bytes_val.decode('utf-8')
+    
+    # On retire les caractères '[' et ']', puis on convertit le résultat en int
+    output = string_val.strip('[]')
+    st.session_state.pred = output
+    return output
