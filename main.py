@@ -75,12 +75,13 @@ number = st.request_pred(X_test)
 
 data = te.json_formater(X_test, number)
 
+st.pred_output()
+
 pred = te.mlflow_model(data, AZUREML_URL, AZUREML_APIKEY)
 
 te.bytes_to_int(pred)
 
 dependance_plot = st.shap_tree_explainer(LGB_model, X_test_prepro, number)
-
-st.pred_output()
-
 #st.pred_dashboard(number, shap_values, dependance_plot)
+
+st.display_pred()
