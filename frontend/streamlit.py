@@ -58,12 +58,12 @@ def shap_summary_plot(model: object, masker: pd.DataFrame) -> pd.DataFrame:
 
     return shap_values
 
-def shap_tree_explainer(model, matrix, number):
+def shap_tree_explainer(model, matrix, number, pred):
     number = number - 1
-    if 'pred' not in st.session_state:
-        pred = 1
-    else:
-        pred = st.session_state.pred
+    # if 'pred' not in st.session_state:
+    #     pred = 1
+    # else:
+    #     pred = st.session_state.pred
     # liste des colonnes
     model.params['objective'] = 'binary'
     tree_explainer = shap.TreeExplainer(model)
@@ -72,11 +72,11 @@ def shap_tree_explainer(model, matrix, number):
     dependence_plot = shap.force_plot(tree_explainer.expected_value[int(pred)], shap_values[int(pred)][number], matrix.iloc[number,:])
     return dependence_plot
 
-def pred_output():
-    if 'pred' not in st.session_state:
-        st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
-    else:
-        st.session_state.pred
+# def pred_output():
+#     if 'pred' not in st.session_state:
+#         st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
+#     else:
+#         st.session_state.pred
 
 def select_input():
     st.session_state.number
@@ -106,26 +106,22 @@ def request_pred(df):
 
     return number
 
-def display_pred():
-    if 'pred' not in st.session_state:
-        st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
-    else:
-        st.session_state.pred
-    st.header(st.session_state.pred)
-
-# def pred_dashboard(number, shap_values, force_plot):
+# def display_pred():
 #     if 'pred' not in st.session_state:
 #         st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
 #     else:
 #         st.session_state.pred
+#     st.header(st.session_state.pred)
 
-#     st.subheader("Output : " + st.session_state.pred, divider="rainbow")
-#     st.subheader("Nous pouvons à l'aide de la méthode SHAP afficher l'interprétation d'un client donné :")
+def pred_dashboard(number, shap_values, force_plot, pred):
+
+    st.subheader("Output : " + pred, divider="rainbow")
+    st.subheader("Nous pouvons à l'aide de la méthode SHAP afficher l'interprétation d'un client donné :")
     
-#     # Affichons les graphiques SHAP
+    # Affichons les graphiques SHAP
 
-#     st_shap(shap.plots.waterfall(shap_values[number -1]), width=1000)
-#     st.write("Description de la première image.")
+    st_shap(shap.plots.waterfall(shap_values[number -1]), width=1000)
+    st.write("Description de la première image.")
 
-#     st_shap(force_plot, width=1000) 
-#     st.write("Description de la deuxième image.")
+    st_shap(force_plot, width=1000) 
+    st.write("Description de la deuxième image.")

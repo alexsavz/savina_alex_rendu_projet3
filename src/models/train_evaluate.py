@@ -174,5 +174,5 @@ def bytes_to_int(bytes_val):
     
     # On retire les caractères '[' et ']', puis on convertit le résultat en int
     output = string_val.strip('[]')
-    st.session_state.pred = output
+    #st.session_state.pred = output
     return output
