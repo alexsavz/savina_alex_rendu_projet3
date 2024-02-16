@@ -109,13 +109,8 @@ def request_pred(df):
     return number
 
 def pred_dashboard(number, shap_values, force_plot):
-    pred_output()
-    if st.session_state.pred:
-        pred = st.session_state.pred
-        st.subheader("Output : " + pred, divider="rainbow")
-    else:
-        st.subheader("Output :  sélectionnez un client pour réaliser une prédiction!", divider="rainbow") 
-    
+    pred = st.session_state.pred
+    st.subheader("Output : " + pred, divider="rainbow")
     st.subheader("Nous pouvons à l'aide de la méthode SHAP afficher l'interprétation d'un client donné :")
     
     # Affichons les graphiques SHAP
