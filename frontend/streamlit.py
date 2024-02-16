@@ -68,8 +68,6 @@ def shap_tree_explainer(model, matrix, number):
     model.params['objective'] = 'binary'
     tree_explainer = shap.TreeExplainer(model)
     shap_values = tree_explainer.shap_values(matrix)
-    print(len(tree_explainer.expected_value))
-    print(pred, number)
     # Fonction pour appeler le graphique
     dependence_plot = shap.force_plot(tree_explainer.expected_value[int(pred)], shap_values[int(pred)][number], matrix.iloc[number,:])
     return dependence_plot
@@ -109,8 +107,12 @@ def request_pred(df):
     return number
 
 def pred_dashboard(number, shap_values, force_plot):
-    pred = st.session_state.pred
-    st.subheader("Output : " + pred, divider="rainbow")
+    if 'pred' not in st.session_state:
+        st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
+    else:
+        st.session_state.pred
+
+    st.subheader("Output : " + st.session_state.pred, divider="rainbow")
     st.subheader("Nous pouvons à l'aide de la méthode SHAP afficher l'interprétation d'un client donné :")
     
     # Affichons les graphiques SHAP
