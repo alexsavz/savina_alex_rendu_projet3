@@ -107,6 +107,10 @@ def request_pred(df):
     return number
 
 def display_pred():
+    if 'pred' not in st.session_state:
+        st.session_state.pred = "sélectionnez un client pour réaliser une prédiction!" 
+    else:
+        st.session_state.pred
     st.header(st.session_state.pred)
 
 # def pred_dashboard(number, shap_values, force_plot):
