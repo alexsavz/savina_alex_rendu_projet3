@@ -83,4 +83,4 @@ dependance_plot = st.shap_tree_explainer(LGB_model, X_test_prepro, number)
 
 st.pred_output()
 
-st.pred_dashboard(number, shap_values, dependance_plot)
+#st.pred_dashboard(number, shap_values, dependance_plot)
