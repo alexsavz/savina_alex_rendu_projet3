@@ -75,8 +75,6 @@ number = st.request_pred(X_test)
 
 data = te.json_formater(X_test, number)
 
-st.pred_output()
-
 output = te.mlflow_model(data, AZUREML_URL, AZUREML_APIKEY)
 
 pred = te.bytes_to_int(output)
