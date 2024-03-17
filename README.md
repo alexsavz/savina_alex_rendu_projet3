@@ -15,14 +15,14 @@
 <h2 align="center">Problématique</h2>
 
 <p align="center">
-Contexte :
+<b>Contexte :</b>
 <br>- Domaine de la télécommunication, mission avec l'équipe marketing
 <br>- Identifier les clients fragiles et décrire leur profil
 <br>- Extraire les variables les plus pertinentes à partir des données clients
 </p>
 
 <p align="center">
-Mission :
+<b>Mission :</b>
 <br>- Réaliser une analyse exploratoire
 <br>- Réaliser une analyse prédictive
 <br>- Concevoir un projet portable et reproductible
@@ -30,9 +30,17 @@ Mission :
 </p>
 
 <h2 align="center">Dashboard</h2>
-<p align="center">
-  <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">Visitez le Dashboard ici</a>
-</p>
+<table align="center">
+  <tr>
+    <td align="center" valign="top">
+      Dashboard intéractif <br/>
+      <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">https://alexsavina-scoring-clientfragile.streamlit.app/</a> <br/><br>
+      <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">
+        <img alt="Todo App" src="/frontend/assets/dashboard-min.png" width="200px" style="max-width:100%; border-radius: 10px;"/>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## Tech stack
 
