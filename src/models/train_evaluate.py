@@ -1,9 +1,9 @@
-"""fonctions d’entrainement et d’évaluation du modèle"""
+"""train and evaluate model functions"""
+
 import json
 import os
 import ssl
 import urllib.request
-import streamlit as st
 
 import lightgbm as lgb
 import numpy as np
@@ -112,9 +112,9 @@ def load_model(path: str) -> dict:
 
 
 def json_formater(df, number):
-    # Convertir le DataFrame en JSON
+    # Convert the Dataframe in JSON
     json_df = df.iloc[(number - 1) : number, :].to_json(orient="split")
-    # Formatons les données pour l'endpoints du modèle ML qui attend une structure spécifique du JSON
+    # Format the datas for the MLmodel endpoint
     json_to_py = json.loads(json_df)
     data_str = {"input_data": json_to_py}
     data = str.encode(json.dumps(data_str))
@@ -168,11 +168,9 @@ def mlflow_model(body, url, api_key):
         print(error.read().decode("utf8", "ignore"))
     return result
 
+
 def bytes_to_int(bytes_val):
-    # Convertir bytes en string
-    string_val = bytes_val.decode('utf-8')
-    
-    # On retire les caractères '[' et ']', puis on convertit le résultat en int
-    output = string_val.strip('[]')
-    #st.session_state.pred = output
+    # Convert bytes in string
+    string_val = bytes_val.decode("utf-8")
+    output = string_val.strip("[]")
     return output

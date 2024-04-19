@@ -33,8 +33,7 @@
 <table align="center">
   <tr>
     <td align="center" valign="top">
-      Dashboard intéractif <br/>
-      <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">https://alexsavina-scoring-clientfragile.streamlit.app/</a> <br/><br>
+      <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">Visiter le dashboard streamlit</a> <br/><br>
       <a href="https://alexsavina-scoring-clientfragile.streamlit.app/">
         <img alt="Todo App" src="/frontend/assets/dashboard-min.png" width="200px" style="max-width:100%; border-radius: 10px;"/>
       </a>
@@ -44,10 +43,10 @@
 
 ## Tech stack
 
-**Analyse des données:** pandas, numpy, scipy
-**Représentation graphique:** matplotlib, seaborn, plotly
-**Modelisation:** scikit-learn, lightgbm, shap
-**Mise en production:** Docker, Github Actions, mlflow, Streamlit
+- **Analyse des données:** pandas, numpy, scipy
+- **Représentation graphique:** matplotlib, seaborn, plotly
+- **Modelisation:** scikit-learn, lightgbm, shap
+- **Mise en production:** Docker, Github Actions, mlflow, Streamlit
 
 ## Notebook
 

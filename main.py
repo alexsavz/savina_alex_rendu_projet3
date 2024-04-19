@@ -3,7 +3,8 @@
 # Functions files - modules
 
 import frontend.streamlit as st
-import src.data.export_data as exp
+
+# import src.data.export_data as exp
 import src.data.import_data as imp
 import src.features.build_features as bf
 import src.models.train_evaluate as te
@@ -60,24 +61,23 @@ LGB_model = te.load_model(MODEL)
 # MODELISATION: Light GBM ----------------------------
 
 y_test_pred = LGB_model.predict(X_test_prepro, raw_score=False)
-print(f"Affichons les 5 premières prédictions : {y_test_pred[0:5]}")
 y_test_pred_rounded = [round(x) for x in y_test_pred]
-print(f"Affichons les 5 premières prédictions : {y_test_pred_rounded[0:5]}")
+print(y_test_pred_rounded[0:10])
 
 # save csv
-exp.save_data(y_test, y_test_pred)
+# exp.save_data(y_test, y_test_pred) Unused here
 
 # FRONTEND
 st.display_dashboard()
 shap_values = st.shap_summary_plot(LGB_model, X_test_prepro)
 
 number = st.request_pred(X_test)
+pred = y_test_pred_rounded[number - 1]
+# data = te.json_formater(X_test, number)
 
-data = te.json_formater(X_test, number)
+# output = te.mlflow_model(data, AZUREML_URL, AZUREML_APIKEY) AzureML Endpoint is disabled due to the financial cost
 
-output = te.mlflow_model(data, AZUREML_URL, AZUREML_APIKEY)
-
-pred = te.bytes_to_int(output)
+# pred = te.bytes_to_int(output)
 
 dependance_plot = st.shap_tree_explainer(LGB_model, X_test_prepro, number, pred)
 st.pred_dashboard(number, shap_values, dependance_plot, pred)
